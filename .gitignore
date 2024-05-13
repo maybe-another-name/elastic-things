@@ -1,0 +1,5 @@
+*.crt
+*.log
+target
+.vscode
+*.secret
