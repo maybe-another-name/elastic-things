@@ -1,7 +1,6 @@
 package blah;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -12,6 +11,8 @@ import blah.helpers.EsConnectionHelper;
 import blah.helpers.EsConnectionHelper.EsClosableThings;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import lombok.extern.slf4j.Slf4j;
+
+import static blah.Things.LogEntry;
 
 /**
  * As outlined in testing_goals.md, this will try to cause *measureable* problem
@@ -66,9 +67,4 @@ public class BadDocumentIndexer {
     }
   }
 
-  public record LogEntry(String hostIp, String message) {
-  };
-
-  public record IpLocation(String ip, String country, String city) {
-  };
 }
