@@ -185,5 +185,67 @@ GET ip_location/_search
   ],
   "_source": false
 }
+`
+
+# testing a lookup against the same field (separate document/sparse-schema)
+
 
 `
+POST logs/_doc?refresh
+{
+  "host": "192.168.1.1",
+  "user": "jimmy-jimmy"
+}
+`
+
+`
+POST logs/_search
+{
+  "runtime_mappings": {
+    "user": {
+        "type": "lookup", 
+        "target_index": "logs", 
+        "input_field": "host", 
+        "target_field": "host", 
+        "fetch_fields": ["user"] 
+    }
+  },
+  "fields": [
+    "host",
+    "message",
+    "user"
+  ],
+  "_source": false
+}
+`
+-> doesn't seem to work... confirm against a separate index
+
+`
+POST logins/_doc?refresh
+{
+  "host": "192.168.1.1",
+  "user": "jimmy-jimmy"
+}
+`
+
+`
+POST logs/_search
+{
+  "runtime_mappings": {
+    "user": {
+        "type": "lookup", 
+        "target_index": "logins", 
+        "input_field": "host", 
+        "target_field": "host", 
+        "fetch_fields": ["user"] 
+    }
+  },
+  "fields": [
+    "host",
+    "message",
+    "user"
+  ],
+  "_source": false
+}
+`
+-> expected result
