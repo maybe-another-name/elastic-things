@@ -34,7 +34,6 @@ This document demonstrates some of the considerations and potential schema desig
 >
 >large-enriched-field-f
 
-
 * All the 'display' fields must come back in the result to be displayed in the table
 * A substantial portion of the documents will have the 'enriched-display-field-e'
 * All documents have a 'sample-id' field (not listed for simplicity)
@@ -44,16 +43,24 @@ This document demonstrates some of the considerations and potential schema desig
 ## Samples
 
 sample a:
- * has no large or large-enriched fields
- * has 'enriched-display-field-e'
+* has no large or large-enriched fields
+* has 'enriched-display-field-e'
 
 sample b:
- * has large field
- * has 'enriched-display-field-e'
+* has large field
+* has 'enriched-display-field-e'
 
 sample c:
- * has large-enriched field
- * has 'enriched-display-field-e'
+* has large-enriched field
+* has 'enriched-display-field-e'
+
+sample d:
+* has large field
+* has large-enriched field
+* has 'enriched-display-field-e'
+
+___Note: samples 'b','c'&'d' are handled the same in the candidates; the difference is on the client-side___
+  * for brevity, only samples 'a' & 'b' are demonstrated (since 'b' is anticipated as being the same as 'c' & 'd')
 
 
 # candidate a: single 'sparse' schema with updates
@@ -79,61 +86,44 @@ sample c:
 ## Samples (repeated for convenience)
 
 sample a:
- * has no large or large-enriched fields
+* has no large or large-enriched fields
 
 sample b:
- * has large field
-
-sample c:
- * has large-enriched field
+* has large field
 
 ## Document 'a' with no 'large' or 'large-enriched' fields
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
 enriched-display-field-e
+}
 `
----
+
 ## Document 'b' with 'large' field
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
 large-field-d.1
 enriched-display-field-e
-`
----
+}
 ...
----
-`
+{
 small-field-a
 small-field-b
 small-field-c
 large-field-d.n
 enriched-display-field-e
+}
 `
----
+
 
 ** __Note: every 'enriched-display' change hits all sample fragments (multiple documents updated)__
-
-## Document 'c' with 'large-enriched' field
-`
-small-field-a
-small-field-b
-small-field-c
-large-field-d.1
-enriched-display-field-e
-`
----
-`
-small-field-a
-small-field-b
-small-field-c
-large-field-d.n
-enriched-display-field-e
-`
----
 
 ## Considerations:
 - no usage of runtime lookup
@@ -161,105 +151,78 @@ enriched-display-field-e
     * uses 'runtime lookup' to merge all displayable elements
 
 ## Sample document structure (repeated for convenience)
-
-`
-small-display-field-a
-small-display-field-b
-small-display-field-c
-large-field-d
-enriched-display-field-e
-large-enriched-field-f
-`
+>small-display-field-a 
+>
+>small-display-field-b
+>
+>small-display-field-c
+>
+>large-field-d
+>
+>enriched-display-field-e
+>
+>large-enriched-field-f
 
 ## Samples (repeated for convenience)
 
 sample a:
- * has no large or large-enriched fields
+* has no large or large-enriched fields
 
 sample b:
- * has large field
-
-sample c:
- * has large field and large-enriched field
+* has large field
 
 ## Document 'a' with no 'large' or 'large-enriched' fields
 
-index I:
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
+}
 `
----
+
+`
 index II:
-`
+{
 enriched-display-field-e
+}
 `
----
+
 
 ## Document 'b' with 'large' field
 
-index I:
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
+}
 `
----
+
+`
 index II:
+{ enriched-display-field-e }
 `
-enriched-display-field-e
+
 `
----
 index I:
-`
+{
 small-field-a
 small-field-b
 small-field-c
 large-field-d.1
-`
----
+}
 ...
----
-`
+{
 small-field-a
 small-field-b
 small-field-c
 large-field-d.n
+}
 `
----
 
-## Document 'c' with 'large-enriched' field
-
-index I:
-`
-small-field-a
-small-field-b
-small-field-c
-`
----
-index II:
-`
-enriched-display-field-e
-`
----
-index I:
-`
-small-field-a
-small-field-b
-small-field-c
-large-enriched-field-f.1
-`
----
-...
----
-`
-small-field-a
-small-field-b
-small-field-c
-large-enriched-field-f.n
-`
----
 
 # candidate c: separate indicies with runtime lookup
 
@@ -275,93 +238,72 @@ large-enriched-field-f.n
 * does not require the client to have any 'state' to perform indexing
 
 ## Sample document structure (repeated for convenience)
-
-`
-small-display-field-a
-small-display-field-b
-small-display-field-c
-large-field-d
-enriched-display-field-e
-large-enriched-field-f
-`
+>small-display-field-a 
+>
+>small-display-field-b
+>
+>small-display-field-c
+>
+>large-field-d
+>
+>enriched-display-field-e
+>
+>large-enriched-field-f
 
 ## Samples (repeated for convenience)
 
 sample a:
- * has no large or large-enriched fields
+* has no large or large-enriched fields
 
 sample b:
- * has large field
-
-sample c:
- * has large field and large-enriched field
+* has large field
 
 ## Document 'a' with no 'large' or 'large-enriched' fields
 
 Same as candidate 'b'. Repeated for convenience:
 
-index I:
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
+}
 `
----
+
+`
 index II:
-`
+{
 enriched-display-field-e
+}
 `
----
+
 
 ## Document 'b' with 'large' field
 
-index I:
 `
+index I:
+{
 small-field-a
 small-field-b
 small-field-c
+}
 `
----
+
+`
 index II:
-`
+{
 enriched-display-field-e
+}
 `
----
+
+`
 index III:
-`
+{
 large-field-d.1
-`
----
+}
 ...
----
-`
+{
 large-field-d.n
+}
 `
----
-
-## Document 'c' with 'large-enriched' field
-
-index I:
-`
-small-field-a
-small-field-b
-small-field-c
-`
----
-index II:
-`
-enriched-display-field-e
-`
----
-index IV:
-`
-large-enriched-field-f.1
-`
----
-...
----
-`
-large-enriched-field-f.n
-`
----
-
