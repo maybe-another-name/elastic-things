@@ -1,3 +1,3 @@
 # outline
 
-Moved to [](../schema-comparison/comparing-schema-candidates.md)
+Moved to [comparing-schema-candidates.md](../schema-comparison/comparing-schema-candidates.md)
