@@ -53,7 +53,7 @@ ___Note: samples 'b','c'&'d' are handled the same in the candidates; the differe
   * specific boolean searches which will not work
     * AND (across documents)
     * NOT (across documents)
-  * speciific boolean searches which will always work
+  * specific boolean searches which will always work
     * OR (across documents)
     * AND (across non-split fields)
     * NOT (across non-split fields)
