@@ -46,7 +46,7 @@ ___Note: samples 'b','c'&'d' are handled the same in the candidates; the differe
 
 * Want to make the field-names more tangible
 * Want to make samples tied to specific uses-cases
-  * normal lookup operation
+  * normal lookup operation (no splits, and a single lookup)
   * alternative lookup operation (searching against lookup field directly)
   * handling multiple hits for a search
     * specific token included 
