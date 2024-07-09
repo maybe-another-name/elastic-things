@@ -76,6 +76,7 @@ PUT email-envelope
 
 ```
 ### aggregated query
+```
 GET email-envelope,enrichment-views/_search
 {
   "query": {
@@ -94,44 +95,9 @@ GET email-envelope,enrichment-views/_search
     }
   }  
 }
+```
 
 Can include a filter to only include documents with an aggregation count equal to the number of indicies...
-
-
-```
-GET email-envelope/_search
-{
-  "query": {
-    "match": {
-      "to": "jimmy"
-    }
-  },
-  "runtime_mappings": {
-    "enrichment-views": {
-        "type": "lookup", 
-        "target_index": "enrichment-views", 
-        "input_field": "edh", 
-        "target_field": "email-edh", 
-        "fetch_fields": ["views"] 
-    },
-    "enrichment-translated-subject": {
-        "type": "lookup", 
-        "target_index": "enrichment-translated-subject", 
-        "input_field": "edh", 
-        "target_field": "email-edh", 
-        "fetch_fields": ["translated-subject"] 
-    }
-  },
-  "fields": [
-    "enrichment-views",
-    "to",
-    "from",
-    "subject",
-    "enrichment-translated-subject"
-  ],
-  "_source": false
-}
-```
 
 
 # combining/bucketing emails split across multiple documents
