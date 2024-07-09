@@ -100,4 +100,8 @@ GET email-envelope,enrichment-views/_search
 Can include a filter to only include documents with an aggregation count equal to the number of indicies...
 
 
-# combining/bucketing emails split across multiple documents
+# collapsing emails split across multiple documents
+
+todo...
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/collapse-search-results.html#collapse-search-results
