@@ -1,18 +1,15 @@
 # Abstract samples (copied from comparison)
 
 ## Sample document structure (copied from comparison)
- 
->small-display-field-a 
->
->small-display-field-b
->
->small-display-field-c
->
->large-field-d
->
->enriched-display-field-e
->
->large-enriched-field-f
+
+```
+small-display-field-a 
+small-display-field-b
+small-display-field-c
+large-field-d
+enriched-display-field-e
+large-enriched-field-f
+```
 
 * All the 'display' fields must come back in the result to be displayed in the table
 * A substantial portion of the documents will have the 'enriched-display-field-e'

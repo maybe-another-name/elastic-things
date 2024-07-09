@@ -1,6 +1,6 @@
 # creating linked documents (dynamically created index and mapping)
 
-`
+```
 POST ip_location/_doc?refresh
 {
   "ip": "192.168.1.1",
@@ -25,11 +25,11 @@ POST logs/_doc?refresh
   "host": "192.168.1.1",
   "message": "another first message"
 }
-`
+```
 
 can search from many to one (many messages to one location):
 
-`
+```
 POST logs/_search
 {
   "runtime_mappings": {
@@ -48,7 +48,7 @@ POST logs/_search
   ],
   "_source": false
 }
-`
+```
 
 # aside - document size...
 
@@ -58,34 +58,34 @@ POST logs/_search
 * not sure why that little json is 5kb...
   will add another and see what happens...
 
-`
+```
 POST authors/_doc?refresh
 {
   "book_id": "113607",
   "first_name": "Jimmy",
   "last_name": "James"
 }
-`
+```
 > yellow open   authors                                                            jNU59vrlSZyTAZPagDhvTQ   1   1          2            0     11.9kb         11.9kb       11.9kb
 
 
 Yeah... seems large (6kb).  will try one more
 
-`
+```
 POST authors/_doc?refresh
 {
   "book_id": "113608",
   "first_name": "Billy",
   "last_name": "Willy"
 }
-`
+```
 > yellow open   authors                                                            jNU59vrlSZyTAZPagDhvTQ   1   1          3            0     17.7kb         17.7kb       17.7kb
 
 So...roughly 6KB per document...
 
 interesting... the mapping is kinda strange (not sure if text or keyword), ex:
 
-`
+```
         "last_name": {
           "type": "text",
           "fields": {
@@ -95,7 +95,7 @@ interesting... the mapping is kinda strange (not sure if text or keyword), ex:
             }
           }
         }
-`
+```
 
 * all the fields seem to come back as an array (except for native ones, like _index and _id)
 
@@ -113,19 +113,19 @@ interesting... the mapping is kinda strange (not sure if text or keyword), ex:
 ## try having a many to many (more than one location for an ip address)
 
 * add another address
-`
+```
 POST ip_location/_doc?refresh
 {
   "ip": "192.168.1.1",
   "country": "Canada",
   "city": "Ottawa"
 }
-`
+```
 -> search only returns one of the locations
 
 ## try searching from the other side...
 
-`
+```
 POST ip_location/_search
 {
   "runtime_mappings": {
@@ -145,7 +145,7 @@ POST ip_location/_search
   ],
   "_source": false
 }
-`
+```
 -> again, search only returned on of the messages
 
 this matches their documentation:
@@ -160,7 +160,7 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/runtime-retrievi
 
 ## including a query
 
-`
+```
 GET ip_location/_search
 {
   "query": {
@@ -185,20 +185,20 @@ GET ip_location/_search
   ],
   "_source": false
 }
-`
+```
 
 # testing a lookup against the same field (separate document/sparse-schema)
 
 
-`
+```
 POST logs/_doc?refresh
 {
   "host": "192.168.1.1",
   "user": "jimmy-jimmy"
 }
-`
+```
 
-`
+```
 POST logs/_search
 {
   "runtime_mappings": {
@@ -217,18 +217,18 @@ POST logs/_search
   ],
   "_source": false
 }
-`
+```
 -> doesn't seem to work... confirm against a separate index
 
-`
+```
 POST logins/_doc?refresh
 {
   "host": "192.168.1.1",
   "user": "jimmy-jimmy"
 }
-`
+```
 
-`
+```
 POST logs/_search
 {
   "runtime_mappings": {
@@ -247,5 +247,5 @@ POST logs/_search
   ],
   "_source": false
 }
-`
+```
 -> expected result

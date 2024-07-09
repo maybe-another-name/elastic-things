@@ -22,17 +22,14 @@ This document demonstrates some of the considerations and potential schema desig
 
 ## Sample document structure
  
->small-display-field-a 
->
->small-display-field-b
->
->small-display-field-c
->
->large-field-d
->
->enriched-display-field-e
->
->large-enriched-field-f
+```
+small-display-field-a 
+small-display-field-b
+small-display-field-c
+large-field-d
+enriched-display-field-e
+large-enriched-field-f
+```
 
 * All the 'display' fields must come back in the result to be displayed in the table
 * A substantial portion of the documents will have the 'enriched-display-field-e'
@@ -71,17 +68,14 @@ ___Note: samples 'b','c'&'d' are handled the same in the candidates; the differe
 * does not address the problem of updates (and is made worse, since each displayable enrichment needs to hit multiple documents)
 
 ## Sample document structure (repeated for convenience)
->small-display-field-a 
->
->small-display-field-b
->
->small-display-field-c
->
->large-field-d
->
->enriched-display-field-e
->
->large-enriched-field-f
+```
+small-display-field-a 
+small-display-field-b
+small-display-field-c
+large-field-d
+enriched-display-field-e
+large-enriched-field-f
+```
 
 ## Samples (repeated for convenience)
 
@@ -92,7 +86,7 @@ sample b:
 * has large field
 
 ## Document 'a' with no 'large' or 'large-enriched' fields
-`
+```
 index I:
 {
 small-field-a
@@ -100,10 +94,10 @@ small-field-b
 small-field-c
 enriched-display-field-e
 }
-`
+```
 
 ## Document 'b' with 'large' field
-`
+```
 index I:
 {
 small-field-a
@@ -120,7 +114,7 @@ small-field-c
 large-field-d.n
 enriched-display-field-e
 }
-`
+```
 
 
 ** __Note: every 'enriched-display' change hits all sample fragments (multiple documents updated)__
@@ -151,17 +145,14 @@ enriched-display-field-e
     * uses 'runtime lookup' to merge all displayable elements
 
 ## Sample document structure (repeated for convenience)
->small-display-field-a 
->
->small-display-field-b
->
->small-display-field-c
->
->large-field-d
->
->enriched-display-field-e
->
->large-enriched-field-f
+```
+small-display-field-a 
+small-display-field-b
+small-display-field-c
+large-field-d
+enriched-display-field-e
+large-enriched-field-f
+```
 
 ## Samples (repeated for convenience)
 
@@ -238,17 +229,14 @@ large-field-d.n
 * does not require the client to have any 'state' to perform indexing
 
 ## Sample document structure (repeated for convenience)
->small-display-field-a 
->
->small-display-field-b
->
->small-display-field-c
->
->large-field-d
->
->enriched-display-field-e
->
->large-enriched-field-f
+```
+small-display-field-a 
+small-display-field-b
+small-display-field-c
+large-field-d
+enriched-display-field-e
+large-enriched-field-f
+```
 
 ## Samples (repeated for convenience)
 
