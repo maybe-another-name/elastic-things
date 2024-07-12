@@ -10,6 +10,9 @@ Some diagrams to help illustrate the different write and read behaviours across 
     * Code base separation (either through endpoint or feature-flag)
     * Deployment separation (ensure both approaches can be deployed concurrently, so adoption is optional)
 
+### Demonstration of specific requirements
+
+Refer to confluence page for requirements.  Something which demonstrates how they are achieved with the different candidates is important.
 
 ### Read diagrams
 
