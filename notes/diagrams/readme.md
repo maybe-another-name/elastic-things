@@ -24,4 +24,5 @@ Keep it as the suffix so that the filenames are still readable.
 
 ## Colours
 * Main is purple (9673A6)
-* Mild Highlight is blue (7EA6E0)
+* Mild Text Highlight is blue (7EA6E0)
+* Mild Element Highlight is orange (CC6600)
