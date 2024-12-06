@@ -28,7 +28,7 @@ PUT emails
 
 # writing a document with fields excluded from source
 
-POST emails/_doc?refresh
+POST emails/_doc/1
 {
   "email-edh": "1",
   "to": "jimmy",
@@ -44,6 +44,7 @@ POST emails/_search
 # verify the body is searchable
 
 POST emails/_search
+{
   "query": {
     "term": {
       "body": {
@@ -53,9 +54,11 @@ POST emails/_search
   }
 }
 
+This should give a score...
+
 # try adding another field
 
-POST emails/_update/uPXofJIBLs1UBsxkxlP6
+POST emails/_update/1
 {
   "script" : "ctx._source.attachment_text = 'small extraction'"
 }
@@ -63,14 +66,17 @@ POST emails/_update/uPXofJIBLs1UBsxkxlP6
 # is the non-source field still searchable?
 
 yes...
+no...
 
-# what other operations can we do?
+# update including non-source
 
-what about updating a (non-source) field?
-
-POST emails/_update/uPXofJIBLs1UBsxkxlP6
+POST emails/_update/1
 {
-  "script" : "ctx._source.from = 'bobby'"
+  "script" : """
+  ctx._source.attachment_text = 'small extraction';
+  ctx._source.body ='smaller body with text'
+  """
 }
 
-still searchable...
+# is the non-source field updated, and searchable?
+yes
